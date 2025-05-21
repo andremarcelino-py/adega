@@ -24,7 +24,7 @@ body {
     background-color: var(--dark-bg);
 }
 
-/* Header and Navigation */
+
 .header {
     height: var(--header-height);
     position: fixed;
@@ -114,7 +114,7 @@ body {
     color: var(--text-color);
 }
 
-/* Enhanced Hero Section */
+
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
@@ -202,7 +202,7 @@ body {
     letter-spacing: 1px;
 }
 
-/* Hero CTA */
+
 .hero-cta {
     display: flex;
     justify-content: center;
@@ -271,7 +271,7 @@ body {
     font-size: 1.5rem;
 }
 
-/* Animations */
+
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
@@ -301,7 +301,6 @@ body {
     }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .hero-content h1 {
         font-size: 2.5rem;
@@ -357,7 +356,7 @@ body {
     }
 }
 
-/* About Section */
+
 .about-section {
     background-color: var(--dark-card-bg);
     padding: 5rem 1rem;
@@ -395,7 +394,7 @@ body {
     margin-bottom: 1rem;
 }
 
-/* Contact Section */
+
 .contact-section {
     padding: 5rem 1rem;
     max-width: 1200px;
@@ -510,7 +509,7 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Animations */
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -522,7 +521,7 @@ body {
     }
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
@@ -572,7 +571,6 @@ body {
     }
 }
 
-/* Utility Classes */
 .cta-button {
     display: inline-block;
     padding: 1rem 2rem;
@@ -589,7 +587,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Custom Scrollbar */
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -608,7 +606,7 @@ body {
     background: var(--secondary-color);
 }
 
-/* Reports Section */
+
 .reports-section {
     background: var(--dark-bg);
     padding: 2rem 1rem;
@@ -646,7 +644,7 @@ body {
     color: var(--primary-color);
 }
 
-/* Settings Section */
+
 .settings-section {
     background: var(--dark-card-bg);
     padding: 2rem 1rem;
@@ -685,7 +683,6 @@ body {
     margin-bottom: 1.5rem;
 }
 
-/* Responsive Updates */
 @media (max-width: 768px) {
     .reports-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -701,7 +698,7 @@ body {
     }
 }
 
-/* Larger screen adjustments */
+
 @media (min-width: 768px) {
     .menu-toggle {
         display: none;
@@ -736,7 +733,6 @@ body {
     }
 }
 
-/* Touch device optimizations */
 @media (hover: none) {
     .nav-menu a:hover {
         background-color: transparent;
@@ -747,7 +743,6 @@ body {
     }
 }
 
-/* Additional mobile optimizations */
 @media (max-width: 480px) {
     .hero-content h1 {
         font-size: 2rem;
@@ -776,19 +771,19 @@ body {
     }
 }
 
-/* Loading states for mobile */
+
 .loading {
     opacity: 0.7;
 }
 
-/* Touch feedback */
+
 .cta-button:active,
 .filter-btn:active,
 .settings-card:active {
     transform: scale(0.98);
 }
 
-/* Survey Button */
+
 .survey-button {
     display: inline-flex;
     align-items: center;
@@ -835,7 +830,7 @@ body {
     color: var(--primary-color);
 }
 
-/* Add general link styles */
+
 a {
     color: var(--text-color);
     text-decoration: none;
