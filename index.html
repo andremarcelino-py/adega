@@ -1,871 +1,222 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="dark">
-    <meta name="theme-color" content="#0a0a0f">
-    <title>ExpoRad - Calculadora Radiológica</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quatre Amis - Sistema de Gestão de Adega</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="app-title">
-                <div class="logo-container">
-                    <img src="logo.jpeg" alt="ExpoRad Logo" class="logo">
-                    <h1>ExpoRad</h1>
-                </div>
-                <p>Calculadora Radiológica - KV, mAs e Tempo para Diferentes Faixas Etárias e Tipos Físicos</p>
-            </div>
-            <div class="radiation-symbol" onclick="window.calculator.openKvMasModal()">
-                <i class="fas fa-atom"></i>
-            </div>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Quatre Amis Logo" class="logo-img">
+        <div class="logo-text">
+          <span class="logo-name">Quatre Amis</span>
+          <span class="logo-subtitle">Gestão de Adegas</span>
         </div>
-    </header>
+      </div>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#funcionalidades">Funcionalidades</a></li>
+        <li><a href="#relatorios">Relatórios</a></li>
+        <li><a href="#configuracoes">Configurações</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- Container Principal -->
-    <div class="main-container">
-        <!-- Seção da Calculadora -->
-        <div class="calculator-section">
-            <h2 class="section-title">🎯 Seleção do Paciente</h2>
-            
-            <!-- Seleção de Idade -->
-            <div class="age-selection" id="age-selection">
-                <h3>Faixa Etária</h3>
-                <div class="age-grid">
-                    <button class="age-btn" data-age="newborn">
-                        <i class="fas fa-baby"></i>
-                        <span>Recém-nascido</span>
-                    </button>
-                    <button class="age-btn" data-age="1a5">
-                        <i class="fas fa-child"></i>
-                        <span>1 a 5 anos</span>
-                    </button>
-                    <button class="age-btn" data-age="5a10">
-                        <i class="fas fa-child"></i>
-                        <span>5 a 10 anos</span>
-                    </button>
-                    <button class="age-btn" data-age="10a18">
-                        <i class="fas fa-child"></i>
-                        <span>10 a 18 anos</span>
-                    </button>
-                    <button class="age-btn" data-age="adult">
-                        <i class="fas fa-user"></i>
-                        <span>Adulto</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Seleção de Tipo Físico (apenas para adultos) -->
-            <div class="body-type-section" id="body-type-section">
-                <h3>Tipo Físico</h3>
-                <div class="body-grid">
-                    <button class="body-btn" data-body="p">
-                        <i class="fas fa-user"></i>
-                        <span>P</span>
-                    </button>
-                    <button class="body-btn" data-body="m">
-                        <i class="fas fa-user"></i>
-                        <span>M</span>
-                    </button>
-                    <button class="body-btn" data-body="g">
-                        <i class="fas fa-user"></i>
-                        <span>G</span>
-                    </button>
-                    <button class="body-btn" data-body="gg">
-                        <i class="fas fa-user"></i>
-                        <span>GG</span>
-                    </button>
-                    <button class="body-btn" data-body="xl">
-                        <i class="fas fa-user"></i>
-                        <span>XL</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Constante do Aparelho -->
-            <div class="equipment-constant-section">
-                <h3>Constante do Aparelho</h3>
-                <div class="constant-input-container">
-                    <input type="number" id="equipment-constant" min="20" max="60" step="0.1" value="40" placeholder="Ex: 40">
-                    <small>Valor típico: 40 (ajuste conforme seu equipamento)</small>
-                </div>
-            </div>
-
-            <!-- Seleção de Região Corporal -->
-            <div class="bodypart-section" id="bodypart-section">
-                <!-- Regiões Gerais -->
-                <div class="selection-group" id="general-regions">
-                    <h3>Região Corporal</h3>
-                    <div class="button-grid">
-                        <button class="bodypart-general-btn" data-region="head">
-                            <i class="fas fa-brain"></i>
-                            <span>Cabeça</span>
-                        </button>
-                        <button class="bodypart-general-btn" data-region="torso">
-                            <i class="fas fa-user"></i>
-                            <span>Tronco</span>
-                        </button>
-                        <button class="bodypart-general-btn" data-region="upper-limbs">
-                            <i class="fas fa-hand-paper"></i>
-                            <span>Membros Superiores</span>
-                        </button>
-                        <button class="bodypart-general-btn" data-region="lower-limbs">
-                            <i class="fas fa-shoe-prints"></i>
-                            <span>Membros Inferiores</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Regiões Específicas - Cabeça -->
-                <div id="head-specific" class="specific-regions" style="display: none;">
-                    <div class="specific-header">
-                        <h4>Cabeça</h4>
-                        <button class="back-btn" onclick="window.calculator.showGeneralRegions()">
-                            <i class="fas fa-arrow-left"></i>
-                            Voltar
-                        </button>
-                    </div>
-                    <div class="button-grid">
-                        <button class="bodypart-btn" data-bodypart="skull-ap">
-                            <i class="fas fa-brain"></i>
-                            <span>Crânio AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="skull-lat">
-                            <i class="fas fa-brain"></i>
-                            <span>Crânio Perfil</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="face-sinuses">
-                            <i class="fas fa-user"></i>
-                            <span>Seios da Face</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="face-nose-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Nariz Perfil</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="face-orbits">
-                            <i class="fas fa-eye"></i>
-                            <span>Órbitas</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="face-mandible">
-                            <i class="fas fa-user"></i>
-                            <span>Mandíbula</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="cavum">
-                            <i class="fas fa-user"></i>
-                            <span>Cavum</span>
-                            <small></small>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Regiões Específicas - Tronco -->
-                <div id="torso-specific" class="specific-regions" style="display: none;">
-                    <div class="specific-header">
-                        <h4>Tronco</h4>
-                        <button class="back-btn" onclick="window.calculator.showGeneralRegions()">
-                            <i class="fas fa-arrow-left"></i>
-                            Voltar
-                        </button>
-                    </div>
-                    <div class="button-grid">
-                        <button class="bodypart-btn" data-bodypart="chest">
-                            <i class="fas fa-lungs"></i>
-                            <span>Tórax PA</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="chest-lat">
-                            <i class="fas fa-lungs"></i>
-                            <span>Tórax Lateral</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="chest-ap">
-                            <i class="fas fa-lungs"></i>
-                            <span>Tórax AP</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="ribs-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Costelas AP</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="ribs-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Costelas Lateral</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="ribs-oblique">
-                            <i class="fas fa-user"></i>
-                            <span>Costelas Oblíqua</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="abdomen-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Abdômen AP</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="abdomen-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Abdômen Lateral</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="abdomen-oblique">
-                            <i class="fas fa-user"></i>
-                            <span>Abdômen Oblíqua</span>
-                            <small></small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="pelvis-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Pelve AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="pelvis-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Pelve Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="pelvis-oblique">
-                            <i class="fas fa-user"></i>
-                            <span>Pelve Oblíqua</span>
-                            <small> </small>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Regiões Específicas - Membros Superiores -->
-                <div id="upper-limbs-specific" class="specific-regions" style="display: none;">
-                    <div class="specific-header">
-                        <h4>Membros Superiores</h4>
-                        <button class="back-btn" onclick="window.calculator.showGeneralRegions()">
-                            <i class="fas fa-arrow-left"></i>
-                            Voltar
-                        </button>
-                    </div>
-                    <div class="button-grid">
-                        <button class="bodypart-btn" data-bodypart="shoulder-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Ombro AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="shoulder-ax">
-                            <i class="fas fa-user"></i>
-                            <span>Ombro Axilar</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="shoulder-y">
-                            <i class="fas fa-user"></i>
-                            <span>Ombro Perfil (Y)</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="shoulder-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Ombro Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="humerus-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Úmero AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="humerus-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Úmero Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="elbow-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Cotovelo AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="elbow-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Cotovelo Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="forearm-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Antebraço AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="forearm-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Antebraço Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="wrist-pa">
-                            <i class="fas fa-user"></i>
-                            <span>Punho PA</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="wrist-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Punho Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="wrist-oblique">
-                            <i class="fas fa-user"></i>
-                            <span>Punho Oblíqua</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="hand-pa">
-                            <i class="fas fa-hand-paper"></i>
-                            <span>Mão PA</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="hand-lat">
-                            <i class="fas fa-hand-paper"></i>
-                            <span>Mão Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="hand-oblique">
-                            <i class="fas fa-hand-paper"></i>
-                            <span>Mão Oblíqua</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="finger-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Dedo AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="finger-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Dedo Lateral</span>
-                            <small> </small>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Regiões Específicas - Membros Inferiores -->
-                <div id="lower-limbs-specific" class="specific-regions" style="display: none;">
-                    <div class="specific-header">
-                        <h4>Membros Inferiores</h4>
-                        <button class="back-btn" onclick="window.calculator.showGeneralRegions()">
-                            <i class="fas fa-arrow-left"></i>
-                            Voltar
-                        </button>
-                    </div>
-                    <div class="button-grid">
-                        <button class="bodypart-btn" data-bodypart="hip-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Quadril AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="hip-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Quadril Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="femur-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Fêmur AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="femur-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Fêmur Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="knee-ap">
-                            <i class="fas fa-user"></i>
-                            <span>Joelho AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="knee-lat">
-                            <i class="fas fa-user"></i>
-                            <span>Joelho Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="leg-ap">
-                            <i class="fas fa-shoe-prints"></i>
-                            <span>Perna AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="leg-lat">
-                            <i class="fas fa-shoe-prints"></i>
-                            <span>Perna Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="ankle-ap">
-                            <i class="fas fa-shoe-prints"></i>
-                            <span>Tornozelo AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="ankle-lat">
-                            <i class="fas fa-shoe-prints"></i>
-                            <span>Tornozelo Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="foot-ap">
-                            <i class="fas fa-shoe-prints"></i>
-                            <span>Pé AP</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="foot-lat">
-                            <i class="fas fa-shoe-prints"></i>
-                            <span>Pé Lateral</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="foot-oblique">
-                            <i class="fas fa-shoe-prints"></i>
-                            <span>Pé Oblíqua</span>
-                            <small> </small>
-                        </button>
-                        <button class="bodypart-btn" data-bodypart="calcaneus">
-                            <i class="fas fa-shoe-prints"></i>
-                            <span>Calcâneo Axial</span>
-                            <small> </small>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botão Calcular -->
-            <button id="calculateBtn" class="calculate-btn">
-                <i class="fas fa-calculator"></i>
-                CALCULAR PARÂMETROS
-            </button>
+  <main>
+    <section id="dashboard" class="hero">
+      <div class="hero-content">
+        <h1>Sistema de Gestão de Adega</h1>
+        <p class="hero-subtitle">Sistema completo para gerenciamento de adegas</p>
+        <div class="hero-features">
+          <div class="hero-feature">
+            <i class="fas fa-database"></i>
+            <span>Gestão de Dados</span>
+          </div>
+          <div class="hero-feature">
+            <i class="fas fa-chart-bar"></i>
+            <span>Relatórios Detalhados</span>
+          </div>
+          <div class="hero-feature">
+            <i class="fas fa-shield-alt"></i>
+            <span>Sistema Seguro</span>
+          </div>
         </div>
-
-        <!-- Seção de Resultados -->
-        <div class="results-section" id="results-section">
-            <h2 class="section-title">📊 Resultados</h2>
-            <div class="results-grid">
-                <div class="result-item">
-                    <div class="result-label">
-                        <i class="fas fa-bolt"></i>
-                        <span>KV</span>
-                    </div>
-                    <div class="result-value" id="kvValue">--</div>
-                </div>
-                
-                <div class="result-item">
-                    <div class="result-label">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <span>mA</span>
-                    </div>
-                    <div class="result-value" id="maValue">--</div>
-                </div>
-                
-                <div class="result-item">
-                    <div class="result-label">
-                        <i class="fas fa-calculator"></i>
-                        <span>mAs</span>
-                    </div>
-                    <div class="result-value" id="mAsValue">--</div>
-                </div>
-            </div>
-            
-            <!-- Botão de Posicionamentos -->
-            <div class="positioning-button-container">
-                <button class="positioning-btn" onclick="window.calculator.showPositioning()">
-                    <i class="fas fa-camera"></i>
-                    <span>Ver Posicionamentos</span>
-                </button>
-            </div>
+        <div class="hero-stats">
+          <div class="stat-item pulse-animation">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Python</span>
+          </div>
+          <div class="stat-item pulse-animation">
+            <span class="stat-number">MySQL</span>
+            <span class="stat-label">Database</span>
+          </div>
+          <div class="stat-item pulse-animation">
+            <span class="stat-number">CustomTkinter</span>
+            <span class="stat-label">Interface</span>
+          </div>
         </div>
-    </div>
-
-    <!-- Seção de Posicionamentos -->
-    <div class="positioning-section" id="positioning-section" style="display: none;">
-        <div class="positioning-header">
-            <button class="back-to-calculator-btn" onclick="window.calculator.showCalculator()">
-                <i class="fas fa-arrow-left"></i>
-                Voltar à Calculadora
-            </button>
-            <h2 class="section-title" id="positioning-title">📐 Posicionamentos Radiológicos</h2>
+        <div class="hero-cta">
+          <a href="#funcionalidades" class="cta-button primary">
+            <i class="fas fa-list-check"></i>
+            Ver Funcionalidades
+          </a>
         </div>
-        
-        <!-- Categorias de Posicionamentos -->
-        <div class="positioning-categories">
-            <div class="category-tabs">
-                <button class="category-tab active" data-category="head-positions">
-                    <i class="fas fa-brain"></i>
-                    Cabeça
-                </button>
-                <button class="category-tab" data-category="chest-positions">
-                    <i class="fas fa-lungs"></i>
-                    Tórax
-                </button>
-                <button class="category-tab" data-category="spine-positions">
-                    <i class="fas fa-user"></i>
-                    Coluna
-                </button>
-                <button class="category-tab" data-category="upper-limb-positions">
-                    <i class="fas fa-hand-paper"></i>
-                    Membros Superiores
-                </button>
-                <button class="category-tab" data-category="lower-limb-positions">
-                    <i class="fas fa-shoe-prints"></i>
-                    Membros Inferiores
-                </button>
-                <button class="category-tab" data-category="abdomen-positions">
-                    <i class="fas fa-user"></i>
-                    Abdômen
-                </button>
-            </div>
+      </div>
+      <div class="hero-scroll">
+        <span>Role para baixo</span>
+        <i class="fas fa-chevron-down bounce"></i>
+      </div>
+    </section>
+
+    <section id="funcionalidades" class="features-section">
+      <div class="features-content">
+        <h2>Funcionalidades do Sistema</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-user-lock"></i>
+            <h3>Sistema de Login</h3>
+            <p>Acesso seguro com autenticação de usuário e senha</p>
+            <ul class="feature-list">
+              <li>Autenticação segura</li>
+              <li>Interface moderna</li>
+              <li>Controle de acesso</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-wine-bottle"></i>
+            <h3>Gestão de Vinhos</h3>
+            <p>Controle completo do catálogo de vinhos</p>
+            <ul class="feature-list">
+              <li>Cadastro de novos vinhos</li>
+              <li>Atualização de informações</li>
+              <li>Remoção de produtos</li>
+              <li>Listagem detalhada</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-industry"></i>
+            <h3>Gestão de Fabricantes</h3>
+            <p>Controle de fornecedores e fabricantes</p>
+            <ul class="feature-list">
+              <li>Cadastro de fabricantes</li>
+              <li>Remoção segura com validação</li>
+              <li>Integração com vinhos</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Gestão de Pedidos</h3>
+            <p>Sistema completo de pedidos</p>
+            <ul class="feature-list">
+              <li>Cadastro de novos pedidos</li>
+              <li>Histórico de vendas</li>
+              <li>Atualização automática de estoque</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-database"></i>
+            <h3>Banco de Dados</h3>
+            <p>Integração com MySQL</p>
+            <ul class="feature-list">
+              <li>Relacionamentos entre tabelas</li>
+              <li>Consultas otimizadas</li>
+              <li>Integridade referencial</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-code"></i>
+            <h3>Tecnologias Utilizadas</h3>
+            <p>Stack tecnológica moderna</p>
+            <ul class="feature-list">
+              <li>Python 3.13</li>
+              <li>CustomTkinter para UI</li>
+              <li>MySQL Connector</li>
+              <li>Datetime para gestão de datas</li>
+            </ul>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Conteúdo das Categorias -->
-        <div class="category-content">
-            <!-- Posicionamentos de Cabeça -->
-            <div id="head-positions" class="position-category active">
-                <div class="positions-grid">
-                    <div class="position-card" data-position="skull-ap">
-                        <div class="position-image">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3>Crânio AP</h3>
-                        <p>Paciente em decúbito dorsal, cabeça centralizada, linha infraorbitomeatal perpendicular ao filme</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="skull-lateral">
-                        <div class="position-image">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3>Crânio Lateral</h3>
-                        <p>Paciente em decúbito lateral, cabeça em perfil, linha infraorbitomeatal paralela ao filme</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="face-waters">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Face - Waters</h3>
-                        <p>Paciente sentado, queixo elevado, boca aberta, linha infraorbitomeatal a 37°</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="sinuses-caldwell">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Seios - Caldwell</h3>
-                        <p>Paciente sentado, queixo no filme, linha infraorbitomeatal a 15°</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                </div>
+    <section id="relatorios" class="reports-section">
+      <div class="reports-content">
+        <h2>Relatórios e Análises</h2>
+        <div class="reports-grid">
+          <div class="report-card">
+            <h3>Controle de Estoque</h3>
+            <div class="chart-placeholder">
+              <i class="fas fa-chart-bar"></i>
             </div>
-
-            <!-- Posicionamentos de Tórax -->
-            <div id="chest-positions" class="position-category">
-                <div class="positions-grid">
-                    <div class="position-card" data-position="chest-pa">
-                        <div class="position-image">
-                            <i class="fas fa-lungs"></i>
-                        </div>
-                        <h3>Tórax PA</h3>
-                        <p>Paciente em posição ortostática, tórax contra o filme, braços para trás, inspiração profunda</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="chest-lateral">
-                        <div class="position-image">
-                            <i class="fas fa-lungs"></i>
-                        </div>
-                        <h3>Tórax Lateral</h3>
-                        <p>Paciente em posição ortostática, lado esquerdo contra o filme, braços elevados</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="chest-ap">
-                        <div class="position-image">
-                            <i class="fas fa-lungs"></i>
-                        </div>
-                        <h3>Tórax AP</h3>
-                        <p>Paciente em decúbito dorsal, filme atrás das costas, braços para os lados</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="ribs-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Costelas AP</h3>
-                        <p>Paciente em decúbito dorsal, braços elevados, filme centralizado no tórax</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                </div>
+            <p>Monitoramento em tempo real do estoque de vinhos</p>
+          </div>
+          <div class="report-card">
+            <h3>Histórico de Vendas</h3>
+            <div class="chart-placeholder">
+              <i class="fas fa-chart-line"></i>
             </div>
-
-            <!-- Posicionamentos de Coluna -->
-            <div id="spine-positions" class="position-category">
-                <div class="positions-grid">
-                    <div class="position-card" data-position="cervical-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Coluna Cervical AP</h3>
-                        <p>Paciente sentado, queixo elevado, linha infraorbitomeatal a 15-20°</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="cervical-lateral">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Coluna Cervical Lateral</h3>
-                        <p>Paciente sentado, perfil da cabeça, queixo elevado, braços para trás</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="thoracic-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Coluna Torácica AP</h3>
-                        <p>Paciente em decúbito dorsal, braços para os lados, joelhos flexionados</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="lumbar-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Coluna Lombar AP</h3>
-                        <p>Paciente em decúbito dorsal, braços para os lados, joelhos flexionados</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                </div>
+            <p>Acompanhamento detalhado das vendas realizadas</p>
+          </div>
+          <div class="report-card">
+            <h3>Análise de Dados</h3>
+            <div class="chart-placeholder">
+              <i class="fas fa-chart-pie"></i>
             </div>
-
-            <!-- Posicionamentos de Membros Superiores -->
-            <div id="upper-limb-positions" class="position-category">
-                <div class="positions-grid">
-                    <div class="position-card" data-position="shoulder-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Ombro AP</h3>
-                        <p>Paciente sentado, braço em rotação neutra, cotovelo flexionado a 90°</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="shoulder-y">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Ombro Y</h3>
-                        <p>Paciente sentado, braço em rotação externa, cotovelo flexionado a 90°</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="elbow-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Cotovelo AP</h3>
-                        <p>Paciente sentado, braço estendido, palma para cima, cotovelo centralizado</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="hand-pa">
-                        <div class="position-image">
-                            <i class="fas fa-hand-paper"></i>
-                        </div>
-                        <h3>Mão PA</h3>
-                        <p>Paciente sentado, mão apoiada no filme, dedos estendidos e separados</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Posicionamentos de Membros Inferiores -->
-            <div id="lower-limb-positions" class="position-category">
-                <div class="positions-grid">
-                    <div class="position-card" data-position="hip-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Quadril AP</h3>
-                        <p>Paciente em decúbito dorsal, pernas estendidas, pés em rotação interna</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="knee-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Joelho AP</h3>
-                        <p>Paciente em decúbito dorsal, perna estendida, patela centralizada</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="ankle-ap">
-                        <div class="position-image">
-                            <i class="fas fa-shoe-prints"></i>
-                        </div>
-                        <h3>Tornozelo AP</h3>
-                        <p>Paciente em decúbito dorsal, pé em flexão dorsal, maléolos centralizados</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="foot-ap">
-                        <div class="position-image">
-                            <i class="fas fa-shoe-prints"></i>
-                        </div>
-                        <h3>Pé AP</h3>
-                        <p>Paciente sentado, pé apoiado no filme, dedos estendidos</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Posicionamentos de Abdômen -->
-            <div id="abdomen-positions" class="position-category">
-                <div class="positions-grid">
-                    <div class="position-card" data-position="abdomen-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Abdômen AP</h3>
-                        <p>Paciente em decúbito dorsal, braços para os lados, joelhos flexionados</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="abdomen-lateral">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Abdômen Lateral</h3>
-                        <p>Paciente em decúbito lateral, braços elevados, joelhos flexionados</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="pelvis-ap">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Pelve AP</h3>
-                        <p>Paciente em decúbito dorsal, pernas estendidas, pés em rotação interna</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                    
-                    <div class="position-card" data-position="pelvis-lateral">
-                        <div class="position-image">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <h3>Pelve Lateral</h3>
-                        <p>Paciente em decúbito lateral, braços elevados, joelhos flexionados</p>
-                        <button class="view-position-btn">Ver Posicionamento</button>
-                    </div>
-                </div>
-            </div>
+            <p>Insights sobre o desempenho do negócio</p>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <!-- Modal de Posicionamento Detalhado -->
-    <div id="position-modal" class="position-modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title">Posicionamento</h3>
-                <button class="close-modal-btn" onclick="window.calculator.closePositionModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="position-details">
-                    <div class="position-image-large">
-                        <i class="fas fa-user" id="modal-icon"></i>
-                    </div>
-                    <div class="position-instructions">
-                        <h4>Instruções de Posicionamento:</h4>
-                        <div id="modal-instructions"></div>
-                        
-                                                <h4>Parâmetros Técnicos:</h4>
-                        <div id="modal-parameters"></div>
-
-                        <!-- Parâmetros técnicos específicos por projeção -->
-                        
-                        <h4>Equipamento:</h4>
-                        <div id="modal-equipment"></div>
-                    </div>
-                </div>
-            </div>
+    <section id="configuracoes" class="settings-section">
+      <h2>Configurações do Sistema</h2>
+      <div class="settings-grid">
+        <div class="settings-card">
+          <i class="fas fa-database"></i>
+          <h3>Banco de Dados</h3>
+          <p>Configurações de conexão MySQL</p>
         </div>
-    </div>
-
-    <!-- Modal Calculadora KV/mAs -->
-    <div id="kvmas-modal" class="kvmas-modal" style="display:none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Calculadora de KV e mAs</h3>
-                <button class="close-modal-btn" onclick="window.calculator.closeKvMasModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="kvmas-form" onsubmit="window.calculator.calculateKvMas(event)">
-                    <div class="form-row">
-                        <label>
-                            <span>Espessura (cm):</span>
-                            <input type="number" id="input-thickness" required min="1" max="50" step="0.1" placeholder="Ex: 20">
-                        </label>
-                    </div>
-                    <div class="form-row">
-                        <label>
-                            <span>Estrutura/Região:</span>
-                            <select id="input-exam-area" required>
-                                <option value="">Selecione...</option>
-                                <option value="corpo-osseo">Corpo Ósseo</option>
-                                <option value="extremidades">Extremidades</option>
-                                <option value="aparelho-respiratorio">Aparelho Respiratório</option>
-                                <option value="aparelho-digestorio">Aparelho Digestório</option>
-                                <option value="aparelho-urinario">Aparelho Urinário</option>
-                                <option value="partes-moles">Somente Partes Moles</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="form-row">
-                        <label>
-                            <span>Constante do Equipamento:</span>
-                            <input type="number" id="input-constante" required min="20" max="60" step="0.1" placeholder="Ex: 40">
-                        </label>
-                    </div>
-                    <div class="form-row">
-                        <label>
-                            <span>DFF (cm):</span>
-                            <input type="number" id="input-distance" required min="80" max="200" step="1" placeholder="Ex: 100">
-                        </label>
-                    </div>
-                    <button type="submit" class="calculate-btn">
-                        <i class="fas fa-calculator"></i> Calcular
-                    </button>
-                </form>
-                <div id="kvmas-result" class="kvmas-result"></div>
-            </div>
+        <div class="settings-card">
+          <i class="fas fa-users-cog"></i>
+          <h3>Usuários</h3>
+          <p>Acessos</p>
         </div>
-    </div>
-    <!-- Fim Modal Calculadora KV/mAs -->
+        <div class="settings-card">
+          <i class="fas fa-bell"></i>
+          <h3>Notificações</h3>
+          <p>Configure alertas de estoque</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <!-- Modal de Resultado KV/mAs -->
-    <div id="kvmas-result-modal" class="kvmas-result-modal">
-      <div class="kvmas-result-modal-content">
-        <span class="close-kvmas-result">&times;</span>
-        <div id="kvmas-result-popup"></div>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quatre Amis</h3>
+        <p>Sistema de Gestão de Adegas</p>
+        <p>Desenvolvido em Python</p>
+        <a href="https://forms.gle/3k1JnffqmhV9JPG98" target="_blank" class="survey-button">
+          <i class="fas fa-star"></i>
+          Pesquisa de Satisfação
+        </a>
+      </div>
+      <div class="footer-section">
+        <h3>Contato</h3>
+        <p>Email: <a href="mailto:adegaquatreamis@gmail.com" class="footer-link">adegaquatreamis@gmail.com</a></p>
       </div>
     </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Adega Quatre Amis. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p><span class="highlight">ExpoRad</span> - Calculadora Radiológica desenvolvida para técnicos e tecnólogos de radiologia</p>
-            <p> </p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
